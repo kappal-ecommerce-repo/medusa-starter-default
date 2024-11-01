@@ -1,71 +1,76 @@
+// Importing necessary modules
+const path = require("path");
+
+// Set Redis URL
 const REDIS_URL = process.env.REDIS_URL || "redis://cache";
 
-/**
- * for admin configurations
- *  @see https://docs.medusajs.com/admin/configuration#build-command-options
- */
+// Set PostgreSQL URL
+const POSTGRES_URL = process.env.POSTGRES_URL || process.env.DATABASE_URL || "postgres://username:password@localhost:5432/medusa-docker";
+
+// Define plugins used in the Medusa project
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
     resolve: `@medusajs/file-local`,
     options: {
-      upload_dir: "uploads",
+      upload_dir: path.resolve(__dirname, "uploads"), // Store uploads in a directory relative to the config file
     },
   },
   {
     resolve: "@medusajs/admin",
-    /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
       autoRebuild: true,
       develop: {
-        open: process.env.OPEN_BROWSER !== "false",
+        open: process.env.OPEN_BROWSER !== "false", // Open browser based on the environment variable
       },
     },
   },
 ];
 
+// Feature flags for Medusa
 const featureFlags = {
-  medusa_v2: true,
+  medusa_v2: true, // Enable Medusa v2 features
 };
 
+// Define modules for Medusa services
 const modules = {
   eventBus: {
-    resolve: "@medusajs/event-bus-redis",
+    resolve: "@medusajs/event-bus-redis", // Using Redis for the event bus
     options: {
       redisUrl: REDIS_URL,
     },
   },
   cacheService: {
-    resolve: "@medusajs/cache-redis",
+    resolve: "@medusajs/cache-redis", // Using Redis for caching
     options: {
       redisUrl: REDIS_URL,
     },
   },
   pricingService: {
-    resolve: "@medusajs/pricing",
+    resolve: "@medusajs/pricing", // Pricing service
   },
   productService: {
-    resolve: "@medusajs/product",
+    resolve: "@medusajs/product", // Product service
   },
 };
 
-/** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
+// Project configuration including database and security settings
 const projectConfig = {
-  jwtSecret: process.env.JWT_SECRET,
-  cookieSecret: process.env.COOKIE_SECRET,
-  store_cors: process.env.STORE_CORS || "http://localhost:8000",
-  admin_cors:
-    process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001",
-  redis_url: REDIS_URL,
-  database_database: "medusa-docker",
-  database_type: "postgres",
-  database_extra:
-    { ssl: false }, // important for docker, postgres is not considered local
-  database_url: process.env.POSTGRES_URL || process.env.DATABASE_URL,
+  jwtSecret: process.env.JWT_SECRET || "default_jwt_secret", // Default JWT secret for development
+  cookieSecret: process.env.COOKIE_SECRET || "default_cookie_secret", // Default cookie secret for development
+  store_cors: process.env.STORE_CORS || "http://localhost:8000", // CORS settings for the store
+  admin_cors: process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001", // CORS settings for the admin
+  redis_url: REDIS_URL, // Redis URL for cache and event bus
+  database_database: "medusa-docker", // Database name
+  database_type: "postgres", // Database type
+  database_extra: {
+    ssl: false, // Important for Docker; set to false if not using SSL
+  },
+  database_url: POSTGRES_URL, // PostgreSQL connection URL
 };
 
-/** @type {import('@medusajs/medusa').ConfigModule} */
+// Export the configuration module
 module.exports = {
   projectConfig,
   plugins,
