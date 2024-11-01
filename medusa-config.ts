@@ -64,9 +64,6 @@ const projectConfig = {
   redis_url: REDIS_URL, // Redis URL for cache and event bus
   database_database: "medusa-docker", // Database name
   database_type: "postgres", // Database type
-  database_extra: {
-    ssl: false, // Important for Docker; set to false if not using SSL
-  },
   database_url: POSTGRES_URL, // PostgreSQL connection URL
 };
 
