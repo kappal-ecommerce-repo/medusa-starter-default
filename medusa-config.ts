@@ -61,9 +61,7 @@ const projectConfig = {
   database_database: "medusa-docker",
   database_type: "postgres",
   database_extra:
-    process.env.NODE_ENV !== "development"
-      ? { ssl: { rejectUnauthorized: false } }
-      : { ssl: false }, // important for docker, postgres is not considered local
+    { ssl: false }, // important for docker, postgres is not considered local
   database_url: process.env.POSTGRES_URL || process.env.DATABASE_URL,
 };
 
