@@ -59,7 +59,8 @@ const modules = {
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET || "default_jwt_secret", // Default JWT secret for development
   cookieSecret: process.env.COOKIE_SECRET || "default_cookie_secret", // Default cookie secret for development
-  store_cors: process.env.STORE_CORS || "http://localhost:8000", // CORS settings for the store
+  // store_cors: process.env.STORE_CORS || "http://localhost:8000", // CORS settings for the store
+  store_cors: process.env.STORE_CORS || "/http:\\/\\/*/",
   admin_cors: process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001", // CORS settings for the admin
   redis_url: REDIS_URL, // Redis URL for cache and event bus
   database_database: "medusa-docker", // Database name
