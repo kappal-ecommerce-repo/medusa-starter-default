@@ -19,19 +19,19 @@ module.exports = defineConfig({
         redisUrl: process.env.REDIS_URL,
       },
     },
-    { resolve: `@medusajs/file-local`,
-      options: {
-        upload_dir: path.resolve(__dirname, "uploads"),
-      }
-    },
-    { 
-      resolve: "@medusajs/admin",
-      options: {
-        autoRebuild: true,
-        develop: {
-          open: process.env.OPEN_BROWSER !== "false",}
-      }
-    },
+    // {
+    //   resolve: "@medusajs/file-local",
+    //   options: {
+    //     upload_dir: "./uploads",
+    //   },
+    // },
+    // {
+    //   resolve: "@medusajs/admin",
+    //   options: {
+    //     autoRebuild: false,
+    //     develop: {},
+    //   },
+    // },
     {
       resolve: "@medusajs/medusa/event-bus-redis",
       options: {
@@ -56,7 +56,7 @@ module.exports = defineConfig({
     sessionOptions: {
         name: process.env.SESSION_NAME || "kappal",
       },
-      workerMode: process.env.WORKER_MODE as "shared" | "worker" | "server" || "shared", 
+      workerMode: process.env.WORKER_MODE === "shared" || process.env.WORKER_MODE === "worker" || process.env.WORKER_MODE === "server" ? process.env.WORKER_MODE : "shared",
       http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
