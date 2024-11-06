@@ -31,7 +31,15 @@
     "@mikro-orm/migrations": "5.9.7",
     "@mikro-orm/postgresql": "5.9.7",
     "awilix": "^8.0.1",
-    "pg": "^8.13.0"
+    "pg": "^8.13.0",
+    "medusa-fulfillment-manual": "latest",  
+    "medusa-payment-manual": "latest",      
+    "@medusajs/file-local": "latest",       
+    "@medusajs/admin": "latest",            
+    "@medusajs/event-bus-redis": "latest",  
+    "@medusajs/cache-redis": "latest",      
+    "@medusajs/pricing": "latest",          
+    "@medusajs/product": "latest"           
   },
   "devDependencies": {
     "@medusajs/test-utils": "latest",
@@ -50,6 +58,7 @@
     "typescript": "^5.6.2",
     "vite": "^5.2.11"
   },
+
   "engines": {
     "node": ">=20"
   }
