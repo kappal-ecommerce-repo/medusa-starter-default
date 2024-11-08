@@ -51,8 +51,9 @@ module.exports = defineConfig({
     databaseUrl: process.env.DATABASE_URL,
     redisUrl: process.env.REDIS_URL || "redis://localhost:6379",  
     redisPrefix: process.env.REDIS_URL || "kappal:",
-    databaseDriverOptions: process.env.NODE_ENV !== "development" ?
-      { ssl: { rejectUnauthorized: false } } : {},
+    databaseDriverOptions: {},
+    // databaseDriverOptions: process.env.NODE_ENV !== "development" ?
+    //   { ssl: { rejectUnauthorized: false } } : {},
     sessionOptions: {
         name: process.env.SESSION_NAME || "kappal",
       },
