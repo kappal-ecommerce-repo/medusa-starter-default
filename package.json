@@ -43,6 +43,7 @@
     "@medusajs/admin": "latest",
     "@medusajs/event-bus-redis" : "^2.0.0",
     "@medusajs/workflow-engine-redis":"^2.0.0",
+    "medusa-plugin-file-cloud-storage":"latest",
     "zod": "^3.22",
     "csstype": "^3.0.10"
   },
@@ -62,6 +63,9 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2",
     "vite": "^5.2.11"
+  },
+  "resolutions": {
+    "@medusajs/medusa": "^2.0.0"
   },
   "engines": {
     "node": ">=20"

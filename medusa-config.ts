@@ -1,4 +1,4 @@
-import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+import { loadEnv, defineConfig, MedusaModuleProviderType, Modules } from '@medusajs/framework/utils'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -7,11 +7,34 @@ const path = require("path");
 
 // Set Redis URL
 const REDIS_URL = process.env.REDIS_URL || "redis://cache";
+const BACKEND_URL = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
 
 // Set PostgreSQL URL
 const POSTGRES_URL = process.env.POSTGRES_URL || process.env.DATABASE_URL || "postgres://username:password@localhost:5432/medusa-docker";
 
 module.exports = defineConfig({
+  plugins: [
+    {
+      resolve: "node_modules/@medusajs/file-local",
+      options: {
+        upload_dir: "static",
+        backend_url: BACKEND_URL
+      },
+    }
+    // {
+    //   resolve: `node_modules/medusa-plugin-file-cloud-storage`,
+    //   options: {
+    //       credentials : {
+    //         client_email: process.env.CLIENT_EMAIL,
+    //         private_key: process.env.PRIVATE_KEY
+    //       },
+    //       privateBucketName: process.env.GCP_STORAGE_PRIVATE_BUCKET_NAME,
+    //       publicBucketName: process.env.GCP_STORAGE_PUBLIC_BUCKET_NAME,
+    //       basePublicUrl: process.env.GCP_STORAGE_BASE_PUBLIC_URL,
+    //   }, 
+    // },
+  ],
+
   modules: [
     {
       resolve: "@medusajs/medusa/cache-redis",
@@ -19,12 +42,8 @@ module.exports = defineConfig({
         redisUrl: process.env.REDIS_URL,
       },
     },
-    // {
-    //   resolve: "@medusajs/file-local",
-    //   options: {
-    //     upload_dir: "./uploads",
-    //   },
-    // },
+
+   
     // {
     //   resolve: "@medusajs/admin",
     //   options: {
@@ -49,29 +68,29 @@ module.exports = defineConfig({
   ],
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    redisUrl: process.env.REDIS_URL || "redis://localhost:6379",  
+    redisUrl: process.env.REDIS_URL || "redis://localhost:6379",
     redisPrefix: process.env.REDIS_URL || "kappal:",
-    databaseDriverOptions: {ssl: false},
+    databaseDriverOptions: { ssl: false },
     // databaseDriverOptions: process.env.NODE_ENV !== "development" ?
     //   { ssl: { rejectUnauthorized: false } } : {},
     sessionOptions: {
-        name: process.env.SESSION_NAME || "kappal",
-      },
-      workerMode: process.env.WORKER_MODE === "shared" || process.env.WORKER_MODE === "worker" || process.env.WORKER_MODE === "server" ? process.env.WORKER_MODE : "shared",
-      http: {
+      name: process.env.SESSION_NAME || "kappal",
+    },
+    workerMode: process.env.WORKER_MODE === "shared" || process.env.WORKER_MODE === "worker" || process.env.WORKER_MODE === "server" ? process.env.WORKER_MODE : "shared",
+    http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
-      },
-    
+    },
+
   },
   admin: {
     path: "/dashboard",
-    backendUrl: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
+    backendUrl: BACKEND_URL
   },
-  
+
 })
 
 // // Define plugins used in the Medusa project
