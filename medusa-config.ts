@@ -1,4 +1,4 @@
-import { loadEnv, defineConfig, MedusaModuleProviderType, Modules } from '@medusajs/framework/utils'
+import { loadEnv, defineConfig, MedusaModuleProviderType, Modules, Module } from '@medusajs/framework/utils'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -40,6 +40,49 @@ module.exports = defineConfig({
         ],
       },
     },
+    {
+      key: Modules.NOTIFICATION,
+      resolve: "@medusajs/medusa/notification",
+      options: {
+        providers: [
+          // ...
+          {
+            resolve: "./src/modules/email",
+            id: "resend",
+            options: {
+              channels: ["email"],
+              api_key: "re_3SYzDKJg_GuFcBnpcTqiXTDQL7SyfmuMh", //process.env.RESEND_API_KEY,
+              from: "captain@kappal.in"//process.env.RESEND_FROM,
+            },
+          },
+        ],
+      },
+    },
+    // {
+    //   key: Modules.NOTIFICATION,
+    //   resolve: "@medusajs/medusa/notification",
+    //   options: {
+    //     providers: [
+    //       // {
+    //       //   resolve: "@medusajs/medusa/notification-local",
+    //       //   id: "notification-local",
+    //       //   options: {
+    //       //     channels: ["local"],
+    //       //   },  
+    //       // },
+    //       // {
+    //       //   resolve: "@medusajs/medusa/notification-sendgrid",
+    //       //   id: "notification-sendgrid",
+    //       //   options: {
+    //       //     channels: ["email"],
+    //       //     api_key: "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",//process.env.SENDGRID_API_KEY,
+    //       //     from: "rajakani.m@kappal.in"//process.env.SENDGRID_FROM,
+    //       //   },  
+    //       // },
+         
+    //     ],
+    //   },
+    // },   
     {
       resolve: "@medusajs/medusa/cache-redis",
       options: {
