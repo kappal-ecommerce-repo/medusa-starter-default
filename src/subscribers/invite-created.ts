@@ -25,7 +25,7 @@ export default async function userInviteHandler({
           replyTo: "info@example.com",
           subject: "You've been invited to Kappal Store!",
         },
-        inviteLink: `${process.env.BACKEND_URL}/dashboard/invite?token=${invite.token}`,
+        inviteLink: `${process.env.MEDUSA_BACKEND_URL}/dashboard/invite?token=${invite.token}`,
         preview: "The administration dashboard awaits...",
       },
     });
