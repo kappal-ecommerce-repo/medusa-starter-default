@@ -22,7 +22,7 @@ export default async function userInviteHandler({
       template: EmailTemplates.INVITE_USER,
       data: {
         emailOptions: {
-          replyTo: "info@example.com",
+          replyTo: `${process.env.CUSTOMER_SUPPORT_EMAIL}`,
           subject: "You've been invited to Kappal Store!",
         },
         inviteLink: `${process.env.MEDUSA_BACKEND_URL}/dashboard/invite?token=${invite.token}`,

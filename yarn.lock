@@ -6690,6 +6690,13 @@
     "@sendgrid/client" "^8.1.4"
     "@sendgrid/helpers" "^8.0.0"
 
+"@sgftech/payment-razorpay@^2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@sgftech/payment-razorpay/-/payment-razorpay-2.1.11.tgz#78eb709efc7886cddd218c30e4d3207fafc1516d"
+  integrity sha512-5d1DPZ1GQ6QqAJ0ehSQIDZh/inHZnqA0GcnFEW71bIJtYZNfZ9AZCNAqyZ5F4vTb/GOOjP5ZQBG+WeHxgVSohQ==
+  dependencies:
+    razorpay "^2.9.5"
+
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
@@ -9164,6 +9171,15 @@ axios@^0.24.0:
   integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
   dependencies:
     follow-redirects "^1.14.4"
+
+axios@^1.6.8:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.8.tgz#1997b1496b394c21953e68c14aaa51b7b5de3d6e"
+  integrity sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==
+  dependencies:
+    follow-redirects "^1.15.6"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 axios@^1.7.4:
   version "1.7.7"
@@ -15310,6 +15326,13 @@ raw-body@2.5.2:
     http-errors "2.0.0"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+razorpay@^2.9.5:
+  version "2.9.5"
+  resolved "https://registry.yarnpkg.com/razorpay/-/razorpay-2.9.5.tgz#6f0b1e31e09f796a360503fc4aebd46501a7e85f"
+  integrity sha512-bmybwyszgfbYWAdO4igyHFk5zFj/D4YuoZAFNbyIYnPwzd+FBY5WvtpfUA9lVBMgnV4NzVEhncxR3It9RI/gCQ==
+  dependencies:
+    axios "^1.6.8"
 
 rc@^1.2.8:
   version "1.2.8"

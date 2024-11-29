@@ -41,6 +41,7 @@
     "@mikro-orm/postgresql": "5.9.7",
     "@react-email/components": "^0.0.26",
     "@rootxpdev/medusa-email-plugin": "^0.8.0",
+    "@sgftech/payment-razorpay": "^2.1.11",
     "@typed-dev/medusa-notification-resend": "^1.0.3",
     "awilix": "^8.0.1",
     "csstype": "^3.0.10",
